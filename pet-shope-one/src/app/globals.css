@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════
+   NAAZ COOL PET SHOP — DESIGN SYSTEM
+   Dark Luxury Terracotta Theme
+   ══════════════════════════════════════════════════ */
+
+:root {
+  /* ── PRIMARY DARK (Background) ── */
+  --ink-950: #0C0A08;
+  --ink-900: #1A1612;
+  --ink-800: #2A2218;
+  --ink-700: #3D3024;
+  --ink-600: #524030;
+
+  /* ── TERRACOTTA (Brand Primary) ── */
+  --terra-700: #8B3A2A;
+  --terra-600: #B04A35;
+  --terra-500: #D4593F;
+  --terra-400: #E07A5F;
+  --terra-300: #F0A898;
+  --terra-100: #FDF0EC;
+
+  /* ── GOLD (Accent / Premium) ── */
+  --gold-500: #E8B84B;
+  --gold-400: #F2CB70;
+  --gold-200: #F8E5B0;
+  --gold-100: #FDF7E6;
+
+  /* ── CREAM (Text on Dark) ── */
+  --cream-100: #FAF6F0;
+  --cream-200: #EDE6DC;
+  --cream-400: #C5B9A8;
+  --cream-600: #8C7D6E;
+
+  /* ── SEMANTIC ── */
+  --success: #4CAF78;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #60A5FA;
+
+  /* ── SECTION BACKGROUNDS ── */
+  --bg-dark: #0C0A08;
+  --bg-card: #1E1A14;
+  --bg-raised: #2A2218;
+  --bg-light: #FAF6F0;
+
+  /* ── FONT STACKS (resolved from Next.js font vars) ── */
+  --nk-font-display: var(--font-syne), 'Syne', sans-serif;
+  --nk-font-body: var(--font-outfit), 'Outfit', sans-serif;
+  --nk-font-accent: var(--font-playfair), 'Playfair Display', serif;
+
+  /* ── TYPE SCALE ── */
+  --text-xs: 0.7rem;
+  --text-sm: 0.813rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 4rem;
+  --text-6xl: 5.5rem;
+
+  /* ── SHADOWS ── */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-terra: 0 8px 24px rgba(212, 89, 63, 0.35);
+  --shadow-gold: 0 8px 24px rgba(232, 184, 75, 0.3);
+  --shadow-glow: 0 0 40px rgba(212, 89, 63, 0.2);
+}
+
+/* Tailwind v4 theme — only expose colors, no font tokens to avoid collisions */
+@theme inline {
+  --color-ink-950: #0C0A08;
+  --color-ink-900: #1A1612;
+  --color-ink-800: #2A2218;
+  --color-ink-700: #3D3024;
+  --color-ink-600: #524030;
+  --color-terra-700: #8B3A2A;
+  --color-terra-600: #B04A35;
+  --color-terra-500: #D4593F;
+  --color-terra-400: #E07A5F;
+  --color-terra-300: #F0A898;
+  --color-terra-100: #FDF0EC;
+  --color-gold-500: #E8B84B;
+  --color-gold-400: #F2CB70;
+  --color-gold-200: #F8E5B0;
+  --color-gold-100: #FDF7E6;
+  --color-cream-100: #FAF6F0;
+  --color-cream-200: #EDE6DC;
+  --color-cream-400: #C5B9A8;
+  --color-cream-600: #8C7D6E;
+  --color-bg-dark: #0C0A08;
+  --color-bg-card: #1E1A14;
+  --color-bg-raised: #2A2218;
+  --color-bg-light: #FAF6F0;
+}
+
+/* ── BASE STYLES ── */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--ink-950);
+    color: var(--cream-100);
+    font-family: var(--nk-font-body);
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── HEADINGS — Prevent vertical crush ── */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  /* ── LINKS ── */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* ── IMAGES ── */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ── SELECTION ── */
+  ::selection {
+    background: var(--terra-500);
+    color: white;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--ink-950);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-600);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--terra-500);
+  }
+}
+
+/* ═══════════════════════════════════════
+   MARQUEE ANIMATION
+   ═══════════════════════════════════════ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* ═══════════════════════════════════════
+   SCROLL INDICATOR
+   ═══════════════════════════════════════ */
+@keyframes scrollBounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateY(12px);
+    opacity: 0.5;
+  }
+}
+
+.animate-scroll-bounce {
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════
+   GRAIN OVERLAY
+   ═══════════════════════════════════════ */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* ═══════════════════════════════════════
+   HIDE SCROLLBAR ON CAROUSELS
+   ═══════════════════════════════════════ */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

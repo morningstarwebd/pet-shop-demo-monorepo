@@ -1,0 +1,17 @@
+{
+  "name": "pet-shop-demo-monorepo",
+  "version": "1.0.0",
+  "description": "Unified repository for 3 Pet Shop Demos and 1 Central Admin Panel using Supabase",
+  "scripts": {
+    "start": "concurrently \"npm run start:admin\" \"npm run start:shop-one\" \"npm run start:shop-two\" \"npm run start:shop-three\"",
+    "start:admin": "cd admin-panel && npm run dev -- -p 3000",
+    "start:shop-one": "cd pet-shope-one && npm run dev -- -p 3001",
+    "start:shop-two": "cd pet-shop-two && npm run dev -- -p 3002",
+    "start:shop-three": "cd pet-shop-three && npm run dev -- -p 3003",
+    "install:all": "concurrently \"cd admin-panel && npm install\" \"cd pet-shope-one && npm install\" \"cd pet-shop-two && npm install\" \"cd pet-shop-three && npm install\"",
+    "build:all": "concurrently \"cd admin-panel && npm run build\" \"cd pet-shope-one && npm run build\" \"cd pet-shop-two && npm run build\" \"cd pet-shop-three && npm run build\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

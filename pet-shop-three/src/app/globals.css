@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 355 14% 98%;
+    --foreground: 355 50% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 355 50% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 355 50% 10%;
+    --primary: 355 90% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 355 14% 92%;
+    --secondary-foreground: 355 50% 20%;
+    --muted: 355 14% 92%;
+    --muted-foreground: 355 20% 45%;
+    --accent: 40 60% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 355 20% 88%;
+    --input: 355 20% 88%;
+    --ring: 355 90% 65%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 355 50% 5%;
+    --foreground: 355 14% 98%;
+    --card: 355 50% 7%;
+    --card-foreground: 355 14% 98%;
+    --popover: 355 50% 7%;
+    --popover-foreground: 355 14% 98%;
+    --primary: 355 90% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 355 30% 15%;
+    --secondary-foreground: 355 14% 98%;
+    --muted: 355 30% 15%;
+    --muted-foreground: 355 20% 65%;
+    --accent: 40 60% 58%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 355 30% 20%;
+    --input: 355 30% 20%;
+    --ring: 355 90% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headline;
+  }
+}
+
+/* Custom scrollbar for better PWA feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari and Opera */
+  }
+}
