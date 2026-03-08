@@ -147,7 +147,7 @@ export default function AdminPage() {
     <div className="min-h-screen pb-32">
       {/* Header Area */}
       <header className="fixed top-0 inset-x-0 z-50 glass-panel !rounded-none !border-x-0 !border-t-0 shadow-none">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 md:h-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${activeTheme.gradient} flex items-center justify-center shadow-lg shadow-${activeTheme.color}/20`}>
               <Settings2 className="w-6 h-6 text-white" />
@@ -201,7 +201,7 @@ export default function AdminPage() {
       </header>
 
       {/* Main Content Area */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-32">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 md:pt-32 pb-24">
         <AnimatePresence mode="wait">
           {activeSite && (
             <motion.div
@@ -365,6 +365,46 @@ export default function AdminPage() {
         </AnimatePresence>
       </main>
 
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 bg-[#0f172a]/95 backdrop-blur-xl border-t border-white/10 z-[60] pb-safe shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.5)]">
+        <div className="flex items-center justify-around px-2 py-3">
+          {sites.map((site) => {
+            const meta = PROJECT_LABELS[site.project_id] || PROJECT_THEMES["pet-shope-one"];
+            const isActive = activeTab === site.project_id;
+            const Icon = PROJECT_THEMES[site.project_id]?.icon || Globe;
+
+            return (
+              <button
+                key={site.project_id}
+                onClick={() => {
+                  if (hasChanges && !window.confirm("You have unsaved changes. Discard?")) return;
+                  setActiveTab(site.project_id);
+                  setHasChanges(false);
+                }}
+                className={`relative flex flex-col items-center gap-1.5 p-2 rounded-xl min-w-[5rem] transition-all duration-300 ${isActive ? "text-white" : "text-white/40 hover:text-white/70"
+                  }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeBottomTabIndicator"
+                    className={`absolute inset-0 bg-gradient-to-t ${PROJECT_THEMES[site.project_id]?.gradient || 'from-indigo-500/0 to-indigo-500/20'} opacity-20 rounded-xl`}
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <div className="relative">
+                  <Icon className={`w-6 h-6 z-10 ${isActive ? PROJECT_THEMES[site.project_id]?.color.replace('#', 'text-[#') + ']' : ''}`} />
+                  {isActive && (
+                    <div className={`absolute -bottom-2.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gradient-to-r ${PROJECT_THEMES[site.project_id]?.gradient || 'from-indigo-500 to-purple-500'}`} />
+                  )}
+                </div>
+                <span className="text-[10px] font-semibold tracking-wider relative z-10 mt-1">{meta.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       {/* Floating Action Bar */}
       <AnimatePresence>
         {hasChanges && (
@@ -372,36 +412,38 @@ export default function AdminPage() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-8 left-0 right-0 z-50 pointer-events-none"
+            className="fixed bottom-24 md:bottom-8 left-0 right-0 z-50 pointer-events-none"
           >
             <div className="max-w-4xl mx-auto px-4">
-              <div className="glass-panel p-4 flex items-center justify-between pointer-events-auto border border-indigo-500/30 shadow-[0_0_40px_-10px_rgba(99,102,241,0.2)]">
-                <div className="flex items-center gap-4 pl-2">
-                  <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
-                  </div>
-                  <div>
-                    <h3 className="text-white font-medium text-sm">Unsaved Changes</h3>
-                    <p className="text-white/50 text-xs mt-0.5">Please review and publish your updates.</p>
+              <div className="glass-panel p-4 flex flex-col sm:flex-row items-center justify-between gap-4 pointer-events-auto border border-indigo-500/30 shadow-[0_0_40px_-10px_rgba(99,102,241,0.2)]">
+                <div className="flex w-full sm:w-auto items-center gap-4 pl-2 justify-between sm:justify-start">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center">
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-medium text-sm">Unsaved Changes</h3>
+                      <p className="text-white/50 text-xs mt-0.5">Review and publish.</p>
+                    </div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex w-full sm:w-auto justify-end items-center gap-2 sm:gap-3">
                   <button
                     onClick={() => {
                       fetchData();
                       setHasChanges(false);
                     }}
-                    className="px-6 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all"
+                    className="flex-1 sm:flex-none px-4 sm:px-6 py-2.5 rounded-xl text-sm font-medium text-white/50 hover:text-white hover:bg-white/5 transition-all"
                   >
                     Discard
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="group relative px-6 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="flex-1 sm:flex-none group relative px-4 sm:px-6 py-2.5 rounded-xl text-sm font-semibold text-white overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${activeTheme.gradient} transition-all duration-300 group-hover:scale-105`} />
-                    <div className="relative flex items-center gap-2">
+                    <div className="relative flex justify-center items-center gap-2">
                       {saving ? (
                         <>
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -410,7 +452,7 @@ export default function AdminPage() {
                       ) : (
                         <>
                           <Save className="w-4 h-4" />
-                          Publish Changes
+                          Publish
                         </>
                       )}
                     </div>
