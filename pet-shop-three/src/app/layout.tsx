@@ -11,17 +11,28 @@ import { getSiteContent } from '@/lib/supabase';
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export const metadata: Metadata = {
-  title: 'Dogs Paradise | Premium Dog Breeding & Adoption',
-  description: 'Where Dreams Meet Wagging Tails! Dogs Paradise is a premium dog breeding and adoption service in Bengaluru. Top quality breeds with pedigree lineage, immunized puppies, and doorstep delivery.',
-  manifest: '/manifest.json',
-  themeColor: '#F06B7A',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'DogsParadise',
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteData = await getSiteContent();
+  const title = siteData?.seo_title || "Dogs Paradise | Premium Dog Breeding & Adoption";
+  const description = siteData?.seo_description || "Where Dreams Meet Wagging Tails! Dogs Paradise is a premium dog breeding and adoption service in Bengaluru. Top quality breeds with pedigree lineage, immunized puppies, and doorstep delivery.";
+
+  return {
+    title,
+    description,
+    manifest: '/manifest.json',
+    themeColor: '#F06B7A',
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: 'default',
+      title: 'DogsParadise',
+    },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

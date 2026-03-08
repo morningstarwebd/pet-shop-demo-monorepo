@@ -35,6 +35,8 @@ export interface SiteContent {
         youtube?: string;
         whatsapp?: string;
     };
+    seo_title?: string;
+    seo_description?: string;
 }
 
 export async function getAllSiteContent(): Promise<SiteContent[]> {

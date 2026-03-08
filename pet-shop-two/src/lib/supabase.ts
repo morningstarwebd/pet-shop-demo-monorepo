@@ -32,6 +32,8 @@ export interface SiteContent {
     hero_subtitle: string;
     footer_text: string;
     social_links: any;
+    seo_title?: string;
+    seo_description?: string;
 }
 
 export async function getSiteContent(): Promise<SiteContent | null> {

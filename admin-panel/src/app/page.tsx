@@ -21,7 +21,8 @@ import {
   MessageCircle,
   Save,
   Loader2,
-  LayoutTemplate
+  LayoutTemplate,
+  Search
 } from "lucide-react";
 
 // Theming for the different projects
@@ -102,6 +103,8 @@ export default function AdminPage() {
       hero_subtitle: activeSite.hero_subtitle,
       footer_text: activeSite.footer_text,
       social_links: activeSite.social_links,
+      seo_title: activeSite.seo_title,
+      seo_description: activeSite.seo_description,
     });
     setSaving(false);
 
@@ -260,6 +263,23 @@ export default function AdminPage() {
                       onChange={(v) => handleFieldChange("footer_text", v)}
                       placeholder="© 2026 Pet Shop. All rights reserved."
                       icon={<TextIcon className="w-4 h-4" />}
+                    />
+                  </FormSection>
+
+                  <FormSection title="SEO & Social Sharing" icon={<Search className="w-5 h-5 text-yellow-400" />}>
+                    <FormField
+                      label="SEO Meta Title"
+                      value={activeSite.seo_title || ""}
+                      onChange={(v) => handleFieldChange("seo_title", v)}
+                      placeholder="e.g. Dogs Paradise | Premium Puppies"
+                      icon={<Heading className="w-4 h-4" />}
+                    />
+                    <FormField
+                      label="SEO Meta Description"
+                      value={activeSite.seo_description || ""}
+                      onChange={(v) => handleFieldChange("seo_description", v)}
+                      placeholder="e.g. Find your perfect puppy. We offer premium breeds with complete vaccination."
+                      textarea
                     />
                   </FormSection>
                 </div>

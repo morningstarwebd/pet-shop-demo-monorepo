@@ -28,25 +28,29 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Naaz Cool Pet Shop — Pets. Reimagined.",
-  description:
-    "The most curated pet experience in India. Premium breeds, grooming services, and pet products. Certified. Kool. Yours.",
-  keywords: [
-    "pet shop",
-    "premium pets",
-    "dog breeds",
-    "pet grooming",
-    "India",
-    "Naaz Cool Pet Shop",
-  ],
-  openGraph: {
-    title: "Naaz Cool Pet Shop — Pets. Reimagined.",
-    description:
-      "The most curated pet experience in India. Premium breeds, grooming, and products.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteData = await getSiteContent();
+  const title = siteData?.seo_title || "Naaz Cool Pet Shop — Pets. Reimagined.";
+  const description = siteData?.seo_description || "The most curated pet experience in India. Premium breeds, grooming services, and pet products. Certified. Kool. Yours.";
+
+  return {
+    title,
+    description,
+    keywords: [
+      "pet shop",
+      "premium pets",
+      "dog breeds",
+      "pet grooming",
+      "India",
+      "Naaz Cool Pet Shop",
+    ],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

@@ -2,20 +2,27 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { BookingProvider } from "@/context/BookingContext";
+import { getSiteContent } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export const metadata: Metadata = {
-  title: "Happy Pets | Premium Pet Marketplace",
-  description: "Find your perfect furry, feathered, or scaly companion at Happy Pets. Browse dogs, cats, birds, and exotic pets with home delivery and visit booking.",
-  keywords: "pets, dogs, cats, birds, exotic pets, pet shop, buy pets online, pet marketplace",
-  openGraph: {
-    title: "Happy Pets | Premium Pet Marketplace",
-    description: "Your trusted destination for healthy, happy pets. Dogs, Cats, Birds & more with doorstep delivery.",
-    type: "website",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const siteData = await getSiteContent();
+  const title = siteData?.seo_title || "Happy Pets | Premium Pet Marketplace";
+  const description = siteData?.seo_description || "Find your perfect furry, feathered, or scaly companion at Happy Pets. Browse dogs, cats, birds, and exotic pets with home delivery and visit booking.";
+
+  return {
+    title,
+    description,
+    keywords: "pets, dogs, cats, birds, exotic pets, pet shop, buy pets online, pet marketplace",
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
