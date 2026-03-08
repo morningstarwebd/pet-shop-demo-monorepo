@@ -41,12 +41,18 @@ export default function AdminPage() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const data = await getAllSiteContent();
-    setSites(data);
-    if (data.length > 0 && !activeTab) {
-      setActiveTab(data[0].project_id);
+    try {
+      const data = await getAllSiteContent();
+      setSites(data);
+      if (data.length > 0 && !activeTab) {
+        setActiveTab(data[0].project_id);
+      }
+    } catch (err) {
+      console.error("Failed to load workspace data:", err);
+      setToast({ message: "Failed to connect to database. Please check configuration.", type: "error" });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [activeTab]);
 
   useEffect(() => {
@@ -385,8 +391,8 @@ export default function AdminPage() {
             className="fixed top-24 left-1/2 -translate-x-1/2 z-[100]"
           >
             <div className={`flex items-center gap-3 px-6 py-4 rounded-2xl shadow-2xl backdrop-blur-xl border ${toast.type === "success"
-                ? "bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10"
-                : "bg-rose-500/10 border-rose-500/20 shadow-rose-500/10"
+              ? "bg-emerald-500/10 border-emerald-500/20 shadow-emerald-500/10"
+              : "bg-rose-500/10 border-rose-500/20 shadow-rose-500/10"
               }`}>
               <CheckCircle2 className={`w-5 h-5 ${toast.type === 'success' ? 'text-emerald-400' : 'text-rose-400'}`} />
               <span className={`text-sm font-medium ${toast.type === 'success' ? 'text-emerald-100' : 'text-rose-100'}`}>

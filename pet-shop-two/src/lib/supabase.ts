@@ -1,4 +1,5 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
+import { unstable_noStore as noStore } from "next/cache";
 
 let _supabase: SupabaseClient | null = null;
 
@@ -30,6 +31,7 @@ export interface SiteContent {
 }
 
 export async function getSiteContent(): Promise<SiteContent | null> {
+    noStore(); // Opt out of Next.js static caching to always get live data
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
         console.warn("Supabase env vars missing. Skipping fetch during build/prerender.");
         return null;
