@@ -9,6 +9,9 @@ import CommunityBanner from "@/components/home/CommunityBanner";
 import BlogPreview from "@/components/home/BlogPreview";
 import { getSiteContent } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Home() {
   const siteData = await getSiteContent();
 

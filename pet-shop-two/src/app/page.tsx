@@ -28,6 +28,9 @@ import MobileCartFab from '@/components/mobile/MobileCartFab';
 // Shared
 import LoadingScreen from '@/components/shared/LoadingScreen';
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function Home() {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
