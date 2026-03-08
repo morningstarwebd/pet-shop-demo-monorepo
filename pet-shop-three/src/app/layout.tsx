@@ -8,6 +8,9 @@ import { WhatsAppFloating } from '@/components/whatsapp/WhatsAppFloating';
 import { Toaster } from '@/components/ui/toaster';
 import { getSiteContent } from '@/lib/supabase';
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: 'Dogs Paradise | Premium Dog Breeding & Adoption',
   description: 'Where Dreams Meet Wagging Tails! Dogs Paradise is a premium dog breeding and adoption service in Bengaluru. Top quality breeds with pedigree lineage, immunized puppies, and doorstep delivery.',

@@ -16,9 +16,6 @@ import {
 import { useState, useEffect } from "react";
 import { getSiteContent, SiteContent } from "@/lib/supabase";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }

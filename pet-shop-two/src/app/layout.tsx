@@ -3,6 +3,9 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { BookingProvider } from "@/context/BookingContext";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Happy Pets | Premium Pet Marketplace",
   description: "Find your perfect furry, feathered, or scaly companion at Happy Pets. Browse dogs, cats, birds, and exotic pets with home delivery and visit booking.",
