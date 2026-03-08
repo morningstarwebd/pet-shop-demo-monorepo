@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { SiteContent } from '@/lib/supabase';
