@@ -7,7 +7,11 @@ function getSupabase(): SupabaseClient {
   if (!_supabase) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-    _supabase = createClient(supabaseUrl, supabaseKey);
+    _supabase = createClient(supabaseUrl, supabaseKey, {
+      global: {
+        fetch: (url, options) => fetch(url, { ...options, cache: "no-store" }),
+      },
+    });
   }
   return _supabase;
 }
