@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from 'react';
 import { Pet, pets, getPetsByCategory, getFeaturedPets } from '@/data/pets';
 import { getSiteContent, SiteContent } from '@/lib/supabase';
