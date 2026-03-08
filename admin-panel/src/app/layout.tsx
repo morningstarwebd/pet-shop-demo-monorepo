@@ -4,6 +4,13 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Pet Shop Admin",
   description: "A premium admin dashboard for managing all demo pet shops.",
+  manifest: "/manifest.json",
+  themeColor: "#4f46e5",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Admin Panel",
+  },
 };
 
 export default function RootLayout({

@@ -22,7 +22,8 @@ import {
   Save,
   Loader2,
   LayoutTemplate,
-  Search
+  Search,
+  ExternalLink
 } from "lucide-react";
 
 // Theming for the different projects
@@ -30,6 +31,12 @@ const PROJECT_THEMES: Record<string, { label: string; icon: any; color: string; 
   "pet-shope-one": { label: "Main Demo", icon: PawPrint, color: "#6366f1", gradient: "from-indigo-500 to-violet-500" },
   "pet-shop-two": { label: "Modern Layout", icon: LayoutTemplate, color: "#ec4899", gradient: "from-pink-500 to-rose-500" },
   "pet-shop-three": { label: "Premium Breeder", icon: Globe, color: "#14b8a6", gradient: "from-teal-400 to-emerald-500" },
+};
+
+const PROJECT_URLS: Record<string, string> = {
+  "pet-shope-one": "https://pet-shope-one.vercel.app",
+  "pet-shop-two": "https://pet-shop-two-five.vercel.app",
+  "pet-shop-three": "https://pet-shop-three-mu.vercel.app",
 };
 
 export default function AdminPage() {
@@ -206,13 +213,27 @@ export default function AdminPage() {
               className="space-y-8"
             >
               {/* Site Overview Header inside Content */}
-              <div className="mb-12">
-                <h2 className="text-4xl font-['Plus_Jakarta_Sans'] font-extrabold text-white mb-2 tracking-tight">
-                  {PROJECT_THEMES[activeTab]?.label || 'Store'} Configuration
-                </h2>
-                <p className="text-white/50 text-lg max-w-2xl">
-                  Manage the core brand identity, contact details, and landing page messaging for the '{activeTab}' instance.
-                </p>
+              <div className="mb-12 flex flex-col sm:flex-row sm:items-start justify-between gap-6">
+                <div>
+                  <h2 className="text-4xl font-['Plus_Jakarta_Sans'] font-extrabold text-white mb-2 tracking-tight">
+                    {PROJECT_THEMES[activeTab]?.label || 'Store'} Configuration
+                  </h2>
+                  <p className="text-white/50 text-lg max-w-2xl">
+                    Manage the core brand identity, contact details, and landing page messaging for the &apos;{activeTab}&apos; instance.
+                  </p>
+                </div>
+
+                {PROJECT_URLS[activeTab] && (
+                  <a
+                    href={PROJECT_URLS[activeTab]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white/80 hover:text-white transition-all duration-300 text-sm font-medium shadow-lg hover:shadow-indigo-500/20"
+                  >
+                    <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span>View Live Site</span>
+                  </a>
+                )}
               </div>
 
               {/* Grid Layout for Forms */}
