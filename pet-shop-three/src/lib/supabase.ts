@@ -30,6 +30,11 @@ export interface SiteContent {
 }
 
 export async function getSiteContent(): Promise<SiteContent | null> {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+        console.warn("Supabase env vars missing. Skipping fetch during build/prerender.");
+        return null;
+    }
+
     const { data, error } = await supabase
         .from("site_content")
         .select("*")

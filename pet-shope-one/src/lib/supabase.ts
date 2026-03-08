@@ -30,8 +30,11 @@ export interface SiteContent {
 }
 
 export async function getSiteContent(): Promise<SiteContent | null> {
-  // Using unstable_noStore for demo purposes to ensure it always fetches the latest data on load
-  // In production, we'd use ISR with Revalidation tags.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+    console.warn("Supabase env vars missing. Skipping fetch during build/prerender.");
+    return null;
+  }
+
   const { data, error } = await supabase
     .from("site_content")
     .select("*")
